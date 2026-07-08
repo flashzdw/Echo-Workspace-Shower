@@ -52,7 +52,8 @@ Echo Workspace 不是一个凭空设计的产品概念,而是来自长期工程�
 ├── index.html      # 7 个 section 的语义化 HTML(Hero / Pain / Value / Workflow / Scenarios / Origin / CTA)
 ├── styles.css      # CSS 变量 + BEM 组件库 + Dark Mode + 响应式三档断点
 ├── script.js       # 滚动 reveal / 动画 / 汉堡 / 主题同步(零依赖)
-├── favicon.svg     # 站点图标
+├── favicon.svg     # 浏览器标签页图标(Liquid Glass 时间轴)
+├── icons/          # PNG 多尺寸图标(32 / 192 / 512)
 └── README.md
 ```
 
