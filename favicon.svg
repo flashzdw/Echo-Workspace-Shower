@@ -1,68 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
-    <!-- 主背景:顶蓝→中蓝紫→底紫的纵向渐变 -->
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1024" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#5B9BF6"/>
-      <stop offset="0.5" stop-color="#6382F0"/>
-      <stop offset="1" stop-color="#8B5CF6"/>
+    <linearGradient id="inner" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2433"/>
+      <stop offset="100%" stop-color="#0B1220"/>
     </linearGradient>
-
-    <!-- 内部柔光带:左上一团高光 -->
-    <radialGradient id="lightBand" cx="320" cy="180" r="640" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.32"/>
-      <stop offset="0.6" stop-color="#FFFFFF" stop-opacity="0.08"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- 顶部高光:横向柔光带 -->
-    <linearGradient id="topHL" x1="0" y1="0" x2="0" y2="200" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.55"/>
-      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.05"/>
-    </linearGradient>
-
-    <!-- 中心主点光晕 -->
-    <radialGradient id="glow" cx="512" cy="512" r="180" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#DCEBFF" stop-opacity="0.65"/>
-      <stop offset="0.5" stop-color="#DCEBFF" stop-opacity="0.25"/>
-      <stop offset="1" stop-color="#DCEBFF" stop-opacity="0"/>
-    </radialGradient>
-
-    <!-- 圆角矩形剪裁 (iOS squircle 比例 ≈ 22.4%) -->
-    <clipPath id="squircle">
-      <rect x="0" y="0" width="1024" height="1024" rx="224" ry="224"/>
-    </clipPath>
   </defs>
 
-  <!-- 背景层 -->
-  <g clip-path="url(#squircle)">
-    <rect width="1024" height="1024" fill="url(#bgGrad)"/>
-    <rect width="1024" height="1024" fill="url(#lightBand)"/>
-    <!-- 顶部反光条 -->
-    <rect x="68" y="0" width="888" height="160" fill="url(#topHL)"/>
-  </g>
+  <!-- 外层黑色厚边框 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="200" ry="200" fill="#000000"/>
 
-  <!-- 边缘折射光(内描边) -->
-  <rect x="2" y="2" width="1020" height="1020" rx="222" ry="222"
-        fill="none" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="4"/>
+  <!-- 白色中间层 -->
+  <rect x="100" y="100" width="824" height="824" rx="160" ry="160" fill="#FFFFFF"/>
 
-  <!-- 主体:时间轴 + 事件点(同样在圆角内) -->
-  <g clip-path="url(#squircle)">
-    <!-- 时间轴主线 -->
-    <rect x="500" y="205" width="24" height="614" rx="12" ry="12" fill="#FFFFFF" fill-opacity="0.96"/>
+  <!-- 内部深色卡片(中心 512,512) -->
+  <rect x="180" y="180" width="664" height="664" rx="130" ry="130" fill="url(#inner)"/>
 
-    <!-- 4 个普通事件点(上下各 2) -->
-    <circle cx="512" cy="287" r="31" fill="#FFFFFF" fill-opacity="0.78"/>
-    <circle cx="512" cy="400" r="31" fill="#FFFFFF" fill-opacity="0.78"/>
-    <circle cx="512" cy="625" r="31" fill="#FFFFFF" fill-opacity="0.78"/>
-    <circle cx="512" cy="737" r="31" fill="#FFFFFF" fill-opacity="0.78"/>
+  <!-- 水平内容条:3 条等粗等长,间距 187px 等距(与 3 个节点圆同步) -->
+  <rect x="425" y="312" width="320" height="38" rx="19" ry="19" fill="#9AA4B5"/>
+  <rect x="425" y="499" width="320" height="38" rx="19" ry="19" fill="#2F76FF"/>
+  <rect x="425" y="686" width="320" height="38" rx="19" ry="19" fill="#9AA4B5"/>
 
-    <!-- 中心主点光晕 -->
-    <circle cx="512" cy="512" r="200" fill="url(#glow)"/>
+  <!-- 时间轴竖线:穿过 3 个节点圆(圆心 y=331/518/705,r=50;线两端在圆内) -->
+  <rect x="343" y="355" width="6" height="380" rx="3" ry="3" fill="#C9D2E0"/>
 
-    <!-- 中心主点(玻璃质感白圆) -->
-    <circle cx="512" cy="512" r="77" fill="#FFFFFF"/>
+  <!-- 顶部节点:cy=331(顶圆位置不变;总跨度 269-755,垂直居中 512) -->
+  <circle cx="346" cy="331" r="62" fill="#9CC2FF"/>
+  <circle cx="346" cy="331" r="50" fill="#2F76FF"/>
+  <path d="M318 333 L339 355 L376 311" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
 
-    <!-- 内圈高光(左上小光斑) -->
-    <ellipse cx="493" cy="489" rx="35" ry="34" fill="#FFFFFF" fill-opacity="0.7"/>
-  </g>
+  <!-- 中间节点:cy=535→518(上移 17px,使 3 圆间距等距 187px) -->
+  <circle cx="346" cy="518" r="50" fill="#FFFFFF"/>
+
+  <!-- 底部节点:cy=705(与顶圆对称 331↔705,中点 518) -->
+  <circle cx="346" cy="705" r="50" fill="#FFFFFF"/>
 </svg>
